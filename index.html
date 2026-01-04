@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extreme Love Ministries Worldwide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #1F3A5F;
+            --secondary: #C9A227;
+            --accent: #e63946;
+            --light: #f8f9fa;
+            --dark: #333333;
+        }
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+       
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+       
+        /* Hero Section with YouTube Background */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+       
+        /* YouTube Background Container */
+        .youtube-background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+       
+        .youtube-background-container iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+        }
+       
+        .youtube-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+       
+        /* Fallback background if video doesn't load */
+        .hero-fallback-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('https://images.unsplash.com/photo-1501281666405-be6e4e0e8b6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -3;
+        }
+       
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+       
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+       
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+        }
+       
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+       
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            border-radius: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+       
+        .btn:hover {
+            background-color: #e0b420;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+       
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+       
+        .btn-primary:hover {
+            background-color: #2a4a7a;
+        }
+       
+        .btn-success {
+            background-color: #25D366;
+            color: white;
+        }
+       
+        .btn-success:hover {
+            background-color: #1da851;
+        }
+       
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+       
+        .card:hover {
+            transform: translateY(-10px);
+        }
+       
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+       
+        .ministry-highlight {
+            background-color: var(--primary);
+            color: white;
+            padding: 80px 20px;
+        }
+       
+        .footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 60px 20px 30px;
+        }
+       
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: #222;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+       
+        .social-icon:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+       
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(31, 58, 95, 0.95);
+            padding: 15px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+       
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+       
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+       
+        /* Mobile Menu Styles */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+       
+        .mobile-menu {
+            display: none;
+            background-color: var(--primary);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            flex-direction: column;
+        }
+       
+        .mobile-menu.active {
+            display: flex;
+        }
+       
+        .mobile-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+       
+        .mobile-menu a:hover {
+            color: var(--secondary);
+        }
+       
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+       
+        .desktop-menu {
+            display: flex;
+            gap: 30px;
+        }
+       
+        .desktop-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+       
+        .desktop-menu a:hover {
+            color: var(--secondary);
+        }
+       
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+           
+            .desktop-menu {
+                display: none;
+            }
+           
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+           
+            .section-title {
+                font-size: 2rem;
+            }
+           
+            /* Adjust YouTube iframe for mobile */
+            .youtube-background-container iframe {
+                width: 100%;
+                height: 100%;
+            }
+        }
+       
+        .payment-method {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--secondary);
+        }
+       
+        .payment-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-right: 20px;
+        }
+       
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+       
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+       
+        .event-date {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+       
+        .event-date .day {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+       
+        .event-date .month {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+       
+        .video-instructions {
+            background-color: #f0f8ff;
+            border: 2px dashed var(--primary);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        /* Books Section Styles */
+        .book-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .book-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .book-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .book-card .btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Floating WhatsApp Button */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;  /* Changed from left: 40px; */
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+}
+
+.whatsapp-float i {
+    margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 55px;
+        height: 55px;
+        font-size: 25px;
+        right: 20px;  /* Changed from left: 20px; */
+        bottom: 20px;
+    }
+
+    .whatsapp-float i {
+        margin-top: 14px;
+    }
+}
+        
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <!-- Logo -->
+            <div class="logo" style="display: flex; align-items: center;">
+                <div style="background-color: var(--secondary); color: var(--primary); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 10px;">
+                    ELM
+                </div>
+                <div>
+                    <h1 style="color: white; font-size: 1.5rem; line-height: 1.2;">Extreme Love Ministries<br><span style="font-size: 0.8rem; color: var(--secondary);">Worldwide</span></h1>
+                </div>
+            </div>
+           
+            <!-- Desktop Navigation -->
+            <div class="desktop-menu">
+                <a href="#home">Home</a>
+                <a href="#branches">Branches</a>
+                <a href="#events">Events</a>
+                <a href="#prayer">Prayer Request</a>
+                <a href="#give">Give</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+           
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+       
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home">Home</a>
+            <a href="#branches">Branches</a>
+            <a href="#events">Events</a>
+            <a href="#prayer">Prayer Request</a>
+            <a href="#give">Give</a>
+            <a href="#contact">Contact Us</a>
+        </div>
+    </nav>
+    <!-- Hero Section with YouTube Video Background -->
+    <section class="hero" id="home">
+        <!-- YouTube Video Background -->
+        <div class="youtube-background-container">
+            <iframe
+                src="https://www.youtube.com/embed/y4S9rRoZovo?autoplay=1&mute=1&loop=1&playlist=y4S9rRoZovo&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+                id="youtubeBackground">
+            </iframe>
+            <div class="youtube-overlay"></div>
+        </div>
+       
+        <!-- Fallback background image -->
+        <div class="hero-fallback-bg"></div>
+       
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1 style="font-size: 3.5rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">WELCOME TO EXTREME LOVE MINISTRIES</h1>
+            <h2 style="font-size: 2rem; margin-bottom: 30px; color: var(--secondary);">WORLDWIDE</h2>
+            <p style="font-size: 1.5rem; margin-bottom: 40px; max-width: 800px;">A Pentecostal, Bible-based, Spirit-filled, Gospel-centred, and Mission-focused community in Amasaman, Accra Ghana</p>
+            <div style="font-size: 2rem; font-weight: bold; margin-bottom: 50px; background-color: rgba(201, 162, 39, 0.2); padding: 15px 30px; border-radius: 10px;">
+                Sundays at 10:00 AM
+            </div>
+            <a href="#events" class="btn">Join Us This Sunday</a>
+        </div>
+    </section>
+    <!-- Get Connected Section -->
+    <section style="padding: 100px 20px;">
+        <div class="container">
+            <h2 class="section-title">GET CONNECTED</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; font-size: 1.2rem; color: #555;">
+                It doesn't matter where you are on your spiritual journey, we are here to welcome you with extreme love and help you grow in faith.
+            </p>
+           
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Card 1 -->
+                <div class="card" style="padding: 40px 30px; text-align: center;">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary);">VOLUNTEER</h3>
+                    <p style="margin-bottom: 25px; color: #666;">
+                        At Extreme Love Ministries, we're not just looking for volunteers. We're looking to help people discover their purpose through service.
+                    </p>
+                    <a href="#contact" class="btn">Learn More</a>
+                </div>
+               
+                <!-- Card 2 -->
+                <div class="card" style="padding: 40px 30px; text-align: center;">
+                    <div class="feature-icon">
+                        <i class="fas fa-pray"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary);">PRAYER</h3>
+                    <p style="margin-bottom: 25px; color: #666;">
+                        Our pastors and prayer team are here to stand with you in prayer, and will be praying for your specific needs this week.
+                    </p>
+                    <a href="#prayer" class="btn">Submit Prayer Request</a>
+                </div>
+               
+                <!-- Card 3 -->
+                <div class="card" style="padding: 40px 30px; text-align: center;">
+                    <div class="feature-icon">
+                        <i class="fas fa-donate"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary);">GIVE</h3>
+                    <p style="margin-bottom: 25px; color: #666;">
+                        Your generous giving helps us spread the gospel of extreme love and support our community outreach programs.
+                    </p>
+                    <a href="#give" class="btn btn-primary">Give Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Ministry Highlight -->
+    <section class="ministry-highlight">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">SHARING EXTREME LOVE</h2>
+            <p style="text-align: center; max-width: 900px; margin: 0 auto 40px; font-size: 1.3rem; line-height: 1.8;">
+                Extreme Love Ministries Worldwide believes in sharing God's extreme love through acceptance, fellowship, and celebration of life. We work to demonstrate this through our worship services, community partnerships, and outreach programs.
+            </p>
+            <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
+                Join us at our Sunday service at 10:00 AM or our Wednesday prayer meeting at 7:00 PM. We are located in Amasaman, Accra Ghana.
+            </p>
+           
+            <div style="display: flex; justify-content: center; margin-top: 50px;">
+                <div style="text-align: center; margin: 0 30px;">
+                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--secondary); margin-bottom: 10px;">10:00 AM</div>
+                    <div style="font-size: 1.2rem;">Sunday Service</div>
+                </div>
+                <div style="text-align: center; margin: 0 30px;">
+                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--secondary); margin-bottom: 10px;">7:00 PM</div>
+                    <div style="font-size: 1.2rem;">Wednesday Prayer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Events Section -->
+    <section id="events" style="padding: 100px 20px; background-color: var(--light);">
+        <div class="container">
+            <h2 class="section-title">UPCOMING EVENTS</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; font-size: 1.2rem; color: #555;">
+                Join us for these upcoming events at Extreme Love Ministries
+            </p>
+           
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Event 1 -->
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">31</span>
+                        <span class="month">DEC</span>
+                    </div>
+                    <div style="padding: 30px;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary);">31st All Night</h3>
+                        <p style="margin-bottom: 15px; color: #666;">
+                            <i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> 9:00 PM - 5:00 AM
+                        </p>
+                        <p style="margin-bottom: 20px; color: #666;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 10px;"></i> Main Auditorium
+                        </p>
+                        <p style="margin-bottom: 20px;">
+                            Join us as we pray and seek God's face for our our lives, church, community, and nation in 2026.
+                        </p>
+                        <a href="#contact" class="btn" style="width: 100%; text-align: center;">Contact Us</a>
+                    </div>
+                </div>
+               
+                <!-- Event 2 -->
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">4</span>
+                        <span class="month">JAN</span>
+                    </div>
+                    <div style="padding: 30px;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary);">1st sunday Service</h3>
+                        <p style="margin-bottom: 15px; color: #666;">
+                            <i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> 8:00 AM - 12:00 PM
+                        </p>
+                        <p style="margin-bottom: 20px; color: #666;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 10px;"></i> Main Auditorium
+                        </p>
+                        <p style="margin-bottom: 20px;">
+                            Join us worship on the first sunday of the month.
+                        </p>
+                        <a href="#contact" class="btn btn-primary" style="width: 100%; text-align: center;">Contact Us</a>
+                    </div>
+                </div>
+               
+                <!-- Event 3
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">05</span>
+                        <span class="month">July</span>
+                    </div>
+                    <div style="padding: 30px;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary);">Marriage Enrichment Seminar</h3>
+                        <p style="margin-bottom: 15px; color: #666;">
+                            <i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> 6:00 PM - 9:00 PM
+                        </p>
+                        <p style="margin-bottom: 20px; color: #666;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 10px;"></i> Fellowship Hall
+                        </p>
+                        <p style="margin-bottom: 20px;">
+                            A special evening for married couples to strengthen their relationship through biblical principles.
+                        </p>
+                        <a href="#contact" class="btn" style="width: 100%; text-align: center;">Register Now</a>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </section>
+    <!-- Prayer Request Section -->
+    <section id="prayer" style="padding: 100px 20px;">
+        <div class="container">
+            <h2 class="section-title">PRAYER REQUEST</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: center;">
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--primary);">WE ARE HERE TO PRAY WITH YOU</h3>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                        At Extreme Love Ministries, we believe in the power of prayer. Our dedicated prayer team is committed to interceding for your needs, concerns, and thanksgiving.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                        Whether you're facing a challenge, celebrating a victory, or simply need spiritual support, we are here to stand with you in prayer.
+                    </p>
+                    <div style="background-color: #f8f9fa; padding: 25px; border-radius: 10px; margin-top: 30px; border-left: 5px solid var(--secondary);">
+                        <h4 style="font-size: 1.3rem; margin-bottom: 15px; color: var(--primary);">How to Submit Your Prayer Request:</h4>
+                        <p style="margin-bottom: 10px;">
+                            <i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i> Click the WhatsApp button below
+                        </p>
+                        <p style="margin-bottom: 10px;">
+                            <i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i> Send us your prayer request
+                        </p>
+                        <p>
+                            <i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i> Our prayer team will pray for you this week
+                        </p>
+                    </div>
+                </div>
+               
+                <div style="text-align: center;">
+                    <div style="background-color: var(--primary); color: white; padding: 40px 30px; border-radius: 10px; margin-bottom: 30px;">
+                        <i class="fas fa-praying-hands" style="font-size: 4rem; margin-bottom: 20px; color: var(--secondary);"></i>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 20px;">Submit Your Prayer Request</h3>
+                        <p style="margin-bottom: 30px; font-size: 1.1rem;">
+                            Click the button below to send your prayer request directly to our prayer team via WhatsApp.
+                        </p>
+                        <a href="https://wa.me/233543385017?text=Hello%20Extreme%20Love%20Ministries%2C%20I%20would%20like%20to%20submit%20a%20prayer%20request." target="_blank" class="btn btn-success" style="font-size: 1.1rem; padding: 15px 30px;">
+                            <i class="fab fa-whatsapp"></i> Send Prayer Request via WhatsApp
+                        </a>
+                        <p style="margin-top: 20px; font-size: 1rem;">
+                            WhatsApp: <strong>+233 54 338 5017</strong>
+                        </p>
+                    </div>
+                    <p style="color: #666; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle" style="color: var(--secondary); margin-right: 5px;"></i> Your prayer requests are confidential and will be prayed over by our prayer team.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Give Section -->
+    <section id="give" style="padding: 100px 20px; background-color: var(--light);">
+        <div class="container">
+            <h2 class="section-title">GIVE & SUPPORT</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; font-size: 1.2rem; color: #555;">
+                Your generous giving enables us to spread the Gospel, support community outreach, and maintain our ministry facilities. Thank you for partnering with us.
+            </p>
+           
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 50px;">
+                <!-- Mobile Money -->
+                <div class="payment-method">
+                    <div class="payment-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--primary);">Mobile Money</h3>
+                        <p style="margin-bottom: 10px; color: #666;">
+                            Send your donation via Mobile Money to:
+                        </p>
+                        <div style="background-color: white; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 1.2rem; font-weight: bold; color: var(--primary); border: 2px dashed var(--secondary);">
+                            +233 54 338 5017
+                        </div>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #777;">
+                            <i class="fas fa-info-circle" style="color: var(--secondary);"></i> Please include "Donation" as reference
+                        </p>
+                    </div>
+                </div>
+               
+                <!-- Bank Transfer -->
+                <div class="payment-method">
+                    <div class="payment-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--primary);">Bank Transfer</h3>
+                        <p style="margin-bottom: 10px; color: #666;">
+                            Transfer your donation to our bank account:
+                        </p>
+                        <div style="background-color: white; padding: 15px; border-radius: 5px; border: 2px dashed var(--secondary);">
+                            <p style="margin-bottom: 5px;"><strong>Bank:</strong> Ghana Commercial Bank</p>
+                            <p style="margin-bottom: 5px;"><strong>Account Name:</strong> Extreme Love Ministries Worldwide</p>
+                            <p style="margin-bottom: 5px;"><strong>Account Number:</strong> 1234567890123</p>
+                            <p><strong>Branch:</strong> Amasaman Branch</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <!-- In Person -->
+                <div class="payment-method">
+                    <div class="payment-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--primary);">In Person</h3>
+                        <p style="margin-bottom: 10px; color: #666;">
+                            Give during our worship services:
+                        </p>
+                        <ul style="padding-left: 20px; color: #666;">
+                            <li style="margin-bottom: 8px;">Sunday Service: 10:00 AM</li>
+                            <li style="margin-bottom: 8px;">Wednesday Prayer: 7:00 PM</li>
+                            <li>Special offering boxes available</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+           
+            <div style="text-align: center; background-color: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);">
+                <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--primary);">Why Give?</h3>
+                <p style="margin-bottom: 20px; font-size: 1.1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Your donations support our community outreach programs, church operations, missionary work, and help us spread the message of God's extreme love throughout Ghana and beyond.
+                </p>
+                <p style="font-style: italic; color: var(--primary);">
+                    "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver." - 2 Corinthians 9:7
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section style="padding: 100px 20px; background-color: var(--light);">
+        <div class="container">
+            <h2 class="section-title">RECOMMENDED BOOKS</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; font-size: 1.2rem; color: #555;">
+                Discover transformative teachings from Bishop Calculus Yeboah through these insightful books.
+            </p>
+           
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                <!-- Book 1 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/71PQG4CKVcL._SY425_.jpg" alt="How To Win the Battles of Life">
+                    <h3>How To Win the Battles of Life</h3>
+                    <a href="https://www.amazon.com/dp/B09VNB74T1" target="_blank" class="btn btn-primary">Buy on Amazon</a>
+                </div>
+
+                <!-- Book 2 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/714EX5jX56L._SY425_.jpg" alt="How To Win The Battles of Life — Part 2">
+                    <h3>How To Win The Battles of Life — Part 2</h3>
+                    <a href="https://www.amazon.com/How-Win-Battles-Life-Part-ebook/dp/B09VNH29BJ/" target="_blank" class="btn btn-primary">Buy on Amazon</a>
+                </div>
+
+                <!-- Book 3 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/61d7V9nNtLL._SY425_.jpg" alt="How to Avoid Living in Sin">
+                    <h3>How to Avoid Living in Sin</h3>
+                    <a href="https://www.amazon.com/How-Avoid-Living-Calculus-Yeboah-ebook/dp/B09VNFZJSB" target="_blank" class="btn btn-primary">Buy on Amazon</a>
+                </div>
+
+                <!-- Book 4 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/61lJFQzHLbL._SY425_.jpg" alt="Living Above the Frustrations of Life">
+                    <h3>Living Above the Frustrations of Life</h3>
+                    <a href="https://www.amazon.com/Living-Above-Frustrations-Calculus-Yeboah-ebook/dp/B09VND5C1R" target="_blank" class="btn btn-primary">Buy on Amazon</a>
+                </div>
+
+                <!-- Book 5 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/31491bHfisL._SY445_SX342_QL70_FMwebp_.jpg" alt="How to Live a Great Life">
+                    <h3>How to Live a Great Life</h3>
+                    <a href="https://www.amazon.com/Live-Great-Life-Calculus-Yeboah-ebook/dp/B09VMR2QM2/" target="_blank" class="btn btn-primary">Buy on Amazon</a>
+                </div>
+
+                <!-- Book 6 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/61YYjEhDcKL._SY425_.jpg" alt="How to Receive Eternal Life">
+                    <h3>How to Receive Eternal Life</h3>
+                    <a href="https://www.amazon.com/Receive-Eternal-Life-Calculus-Yeboah-ebook/dp/B09VMYNXGS/" target="_blank" class="btn btn-primary">Buy on Amazon</a>
+                </div>
+
+                <!-- Book 7 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/81o0gbUA31L._SY425_.jpg" alt="Solutions to the Problems and Troubles in Your Family">
+                    <h3>Solutions to the Problems and Troubles in Your Family</h3>
+                    <a href="https://www.amazon.com/Solutions-Problems-Troubles-Your-Family-ebook/dp/B09VNMGKPC/" target="_blank" class="btn btn-primary">Buy on Amazon</a>
+                </div>
+
+                <!-- Book 8 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/61gh0hlVE8L._SY425_.jpg" alt="Nuggets of Divine Wisdom">
+                    <h3>Nuggets of Divine Wisdom</h3>
+                    <a href="https://www.amazon.com/Nuggets-Divine-Wisdom-Calculus-Yeboah-ebook/dp/B09VMMF7QK/" target="_blank" class="btn btn-primary">Buy on Amazon</a>
+                </div>
+
+                <!-- Book 9 -->
+                <div class="book-card">
+                    <img src="https://m.media-amazon.com/images/I/61B03C23nlL._SY425_.jpg" alt="Solutions To The Problems And Troubles In Your Life">
+                    <h3>Solutions To The Problems And Troubles In Your Life</h3>
+                    <a href="https://www.amazon.com/Solutions-Problems-Troubles-Your-Life-ebook/dp/B09VMR5LXV/" target="_blank" class="btn btn-primary">Buy on Amazon</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get to Know Us -->
+    <section style="padding: 100px 20px;">
+        <div class="container">
+            <h2 class="section-title">GET TO KNOW US</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: center;">
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--primary);">OUR MISSION</h3>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                        At Extreme Love Ministries, we're here to help people move from where they are to where God wants them to be through worship, discipleship, fellowship, and outreach.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                        We are a Pentecostal, Bible-based, Spirit-filled, Gospel-centred, and Mission-focused community that welcomes all people.
+                    </p>
+                    <a href="#branches" class="btn">Visit Our Branches</a>
+                </div>
+                <div>
+                    <img src="https://christianassociationofnigeria.org/wp-content/uploads/2024/05/prayer-2.jpg" alt="Church Community" style="width: 100%; border-radius: 10px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Family Section
+    <section style="padding: 100px 20px; background-color: var(--light);">
+        <div class="container">
+            <h2 class="section-title">HEY, FAMILIES!</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: center;">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Children's Ministry" style="width: 100%; border-radius: 10px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);">
+                </div>
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--primary);">EXTREME LOVE KIDS</h3>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                        Extreme Love Kids is the children's ministry at Extreme Love Ministries for infants to 12 years old. We're dedicated to partnering with parents to lead children to become fully devoted followers of Christ.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                        Through age-specific lessons, activities, and small groups, children learn biblical teachings and real-life lessons they can apply to their lives every week.
+                    </p>
+                    <p style="font-weight: bold; color: var(--primary);">
+                        Sunday School: 10:00 AM (During main service)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>-->
+    <!-- Founder Section -->
+    <section style="padding: 100px 20px; background-color: var(--primary); color: white;">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">MEET OUR FOUNDER</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: center;">
+                <div style="text-align: center;">
+                    <div style="width: 250px; height: 250px; border-radius: 50%; overflow: hidden; margin: 0 auto 30px; border: 5px solid var(--secondary);">
+                        <img src="https://placehold.co/600x400?text=C+Y" alt="Pastor Calculus Yeboah" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 10px;">BISHOP CALCULUS YEBOAH</h3>
+                    <p style="color: #ccc;">Founder & Senior Pastor</p>
+                </div>
+                <div>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.8;">
+                        Bishop Calculus Yeboah founded Extreme Love Ministries with a vision to create a community where God's extreme love is demonstrated through worship, fellowship, and service. With over 30 years of ministry experience, he leads with passion and dedication to spreading the Gospel.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.8;">
+                        His teachings focus on practical application of biblical principles for everyday life, empowering believers to live out their faith with purpose and passion.
+                    </p>
+                    <a href="#events" class="btn" style="background-color: white; color: var(--primary);">Listen to Sermons</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Branches Section -->
+    <section id="branches" style="padding: 100px 20px;">
+        <div class="container">
+            <h2 class="section-title">OUR BRANCHES</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; font-size: 1.2rem; color: #555;">
+                Join us at one of our locations. We'd love to welcome you this Sunday!
+            </p>
+           
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div class="card" style="padding: 30px; text-align: center;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary);">AMASAMAN MAIN CAMPUS</h3>
+                    <p style="margin-bottom: 15px; color: #666;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 10px;"></i> Amasaman, Accra Ghana
+                    </p>
+                    <p style="margin-bottom: 15px; color: #666;">
+                        <i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Sundays: 10:00 AM
+                    </p>
+                    <p style="margin-bottom: 20px; color: #666;">
+                        <i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Wednesdays: 7:00 PM
+                    </p>
+                    <a href="#contact" class="btn">Get Directions</a>
+                </div>
+                <!--
+                <div class="card" style="padding: 30px; text-align: center;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary);">ACCRA CENTRAL BRANCH</h3>
+                    <p style="margin-bottom: 15px; color: #666;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 10px;"></i> Central Accra, Ghana
+                    </p>
+                    <p style="margin-bottom: 15px; color: #666;">
+                        <i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Sundays: 8:00 AM
+                    </p>
+                    <p style="margin-bottom: 20px; color: #666;">
+                        <i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Fridays: 6:00 PM
+                    </p>
+                    <a href="#contact" class="btn">Get Directions</a>
+                </div>
+               
+                <div class="card" style="padding: 30px; text-align: center;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary);">COMMUNITY OUTREACH</h3>
+                    <p style="margin-bottom: 15px; color: #666;">
+                        <i class="fas fa-hands-helping" style="color: var(--secondary); margin-right: 10px;"></i> Various Locations
+                    </p>
+                    <p style="margin-bottom: 15px; color: #666;">
+                        <i class="fas fa-calendar-alt" style="color: var(--secondary); margin-right: 10px;"></i> Monthly Community Events
+                    </p>
+                    <p style="margin-bottom: 20px; color: #666;">
+                        <i class="fas fa-users" style="color: var(--secondary); margin-right: 10px;"></i> Food drives, medical outreach, youth programs
+                    </p>
+                    <a href="#events" class="btn btn-primary">Upcoming Events</a>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" style="padding: 100px 20px; background-color: var(--light);">
+        <div class="container">
+            <h2 class="section-title">CONTACT US</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px;">
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 25px; color: var(--primary);">GET IN TOUCH</h3>
+                   
+                    <div style="margin-bottom: 30px;">
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--secondary); font-size: 1.5rem; margin-right: 15px; margin-top: 5px;"></i>
+                            <div>
+                                <h4 style="font-size: 1.2rem; margin-bottom: 5px; color: var(--primary);">OUR LOCATION</h4>
+                                <p>Amasaman, Accra Ghana</p>
+                            </div>
+                        </div>
+                       
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                            <i class="fas fa-phone" style="color: var(--secondary); font-size: 1.5rem; margin-right: 15px; margin-top: 5px;"></i>
+                            <div>
+                                <h4 style="font-size: 1.2rem; margin-bottom: 5px; color: var(--primary);">PHONE NUMBER</h4>
+                                <p>+233 54 338 5017</p>
+                            </div>
+                        </div>
+                       
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                            <i class="fas fa-clock" style="color: var(--secondary); font-size: 1.5rem; margin-right: 15px; margin-top: 5px;"></i>
+                            <div>
+                                <h4 style="font-size: 1.2rem; margin-bottom: 5px; color: var(--primary);">SERVICE TIMES</h4>
+                                <p>Sunday: 10:00 AM</p>
+                                <p>Wednesday: 7:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div>
+                        <h4 style="font-size: 1.2rem; margin-bottom: 15px; color: var(--primary);">CONNECT WITH US</h4>
+                        <div>
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                            <a href="https://wa.me/233543385017" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+               
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 25px; color: var(--primary);">SEND US A MESSAGE</h3>
+                    <form id="contactForm" style="display: flex; flex-direction: column;">
+                        <input type="text" placeholder="Your Name" required style="padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                        <input type="email" placeholder="Your Email" required style="padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                        <input type="text" placeholder="Subject" style="padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                        <textarea rows="5" placeholder="Your Message" required style="padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;"></textarea>
+                        <button type="submit" class="btn" style="align-self: flex-start;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 50px;">
+                <div>
+                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                        <div style="background-color: var(--secondary); color: var(--primary); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem; margin-right: 10px;">
+                            ELM
+                        </div>
+                        <div>
+                            <h2 style="color: white; font-size: 1.3rem;">Extreme Love Ministries<br><span style="font-size: 0.8rem; color: var(--secondary);">Worldwide</span></h2>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.7;">
+                        A Pentecostal, Bible-based, Spirit-filled, Gospel-centred, and Mission-focused community based in Amasaman, Accra Ghana.
+                    </p>
+                </div>
+               
+                <div>
+                    <h3 style="color: white; font-size: 1.3rem; margin-bottom: 20px;">QUICK LINKS</h3>
+                    <div style="display: flex; flex-direction: column;">
+                        <a href="#home" style="color: #aaa; margin-bottom: 10px; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='#aaa'">Home</a>
+                        <a href="#branches" style="color: #aaa; margin-bottom: 10px; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='#aaa'">Branches</a>
+                        <a href="#events" style="color: #aaa; margin-bottom: 10px; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='#aaa'">Events</a>
+                        <a href="#prayer" style="color: #aaa; margin-bottom: 10px; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='#aaa'">Prayer Request</a>
+                        <a href="#give" style="color: #aaa; margin-bottom: 10px; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='#aaa'">Give</a>
+                        <a href="#contact" style="color: #aaa; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='#aaa'">Contact Us</a>
+                    </div>
+                </div>
+               
+                <div>
+                    <h3 style="color: white; font-size: 1.3rem; margin-bottom: 20px;">CONTACT INFO</h3>
+                    <p style="margin-bottom: 15px;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 10px;"></i> Amasaman, Accra Ghana
+                    </p>
+                    <p style="margin-bottom: 15px;">
+                        <i class="fas fa-phone" style="color: var(--secondary); margin-right: 10px;"></i> +233 54 338 5017
+                    </p>
+                    <p style="margin-bottom: 15px;">
+                        <i class="fas fa-clock" style="color: var(--secondary); margin-right: 10px;"></i> Sunday: 8:00 AM<br>
+                        <span style="margin-left: 28px;">Wednesday: 7:00 PM</span>
+                    </p>
+                </div>
+            </div>
+           
+            <div style="border-top: 1px solid #333; padding-top: 30px; text-align: center;">
+                <p>&copy; 2023 Extreme Love Ministries Worldwide. All Rights Reserved.</p>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: #777;">Powered by Extreme Love</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/233543385017?text=Hello%2C%20I%E2%80%99m%20visiting%20from%20Extreme%20Love%20Ministries%20Worldwide%20and%20I%20would%20like%20to%20make%20an%20enquiry.%20Thank%20you." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+       
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+           
+            // Change icon when menu is open
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+       
+        // Close mobile menu when clicking a link
+        const mobileLinks = document.querySelectorAll('.mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+       
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideMenu = mobileMenu.contains(event.target);
+            const isClickOnMenuButton = mobileMenuBtn.contains(event.target);
+           
+            if (!isClickInsideMenu && !isClickOnMenuButton && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+       
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+       
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+       
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                // Don't prevent default for external links
+                if (this.getAttribute('href').startsWith('#') && this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                   
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                   
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+       
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                contactForm.reset();
+            });
+        }
+       
+        // YouTube background initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // YouTube background fix for mobile
+            const youtubeIframe = document.getElementById('youtubeBackground');
+           
+            if (youtubeIframe) {
+                // Force video to play on mobile
+                setTimeout(function() {
+                    if (youtubeIframe.contentWindow) {
+                        youtubeIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                    }
+                }, 1000);
+               
+                // Reload iframe on window resize (helps with mobile)
+                let resizeTimer;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(function() {
+                        const src = youtubeIframe.src;
+                        youtubeIframe.src = '';
+                        setTimeout(function() {
+                            youtubeIframe.src = src;
+                        }, 100);
+                    }, 250);
+                });
+            }
+           
+            // Add active class to current section in navigation
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.desktop-menu a, .mobile-menu a');
+           
+            function highlightNavLink() {
+                let scrollY = window.pageYOffset;
+               
+                sections.forEach(section => {
+                    const sectionHeight = section.offsetHeight;
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionId = section.getAttribute('id');
+                   
+                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+           
+            window.addEventListener('scroll', highlightNavLink);
+        });
+       
+        // YouTube video error handling
+        const youtubeIframe = document.getElementById('youtubeBackground');
+        if (youtubeIframe) {
+            youtubeIframe.addEventListener('error', function() {
+                console.log('YouTube video failed to load. Using fallback background image.');
+                // The fallback background image will automatically show
+            });
+        }
+    </script>
+</body>
+</html>
