@@ -32,7 +32,7 @@
         .hero {
             position: relative;
             height: 100vh;
-            min-height: 700px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -304,6 +304,14 @@
         }
        
         @media (max-width: 768px) {
+            body {
+                padding-top: 90px;
+            }
+           
+            .logo h1 {
+                font-size: 1.2rem !important;
+            }
+           
             .mobile-menu-btn {
                 display: block;
             }
@@ -324,6 +332,29 @@
             .youtube-background-container iframe {
                 width: 100%;
                 height: 100%;
+            }
+        }
+
+        @media (max-width: 375px) {
+            body {
+                padding-top: 80px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .hero-content div[style*="font-size: 2rem"] {
+                font-size: 1.5rem !important;
+                padding: 10px 20px !important;
             }
         }
        
